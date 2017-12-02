@@ -1,0 +1,13 @@
+.row {
+  border: 10px solid #2c0900;
+  box-shadow: 0px 0px 25px #f1e0a3;
+}
+
+.magic {
+  min-height: 250px;
+}
+
+#health {
+  margin-top: 10px;
+  margin-left: 30%;
+}

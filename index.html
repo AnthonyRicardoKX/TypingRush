@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xml:lang="id" lang="id">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta name="description" content="A HTML5, JavaScript typing game">
+        <meta name="keywords" content="html5, javascript, game, typing">
+        <title>Typing Rush</title>
+        <link href="./Components/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./Components/css/circle.css" rel="stylesheet">
+        <link href="./Components/css/main.css" rel="stylesheet">
+        <script src="./Components/js/jquery-3.2.1.min.js"></script>
+        <script src="./Components/js/radialIndicator.min.js"></script>
+        <script src="./Objects/Word.js"></script>
+    </head>
+
+    <body>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <p>I have fall, I'll rise again</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12">
+                <h3 class="text-center">Level</h3>
+                <p class="text-center">0</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <h3 class="text-center">Score</h3>
+                <p class="text-center">0</p>
+              </div>
+            </div>
+            <div class="row magic">
+              <div class="col-lg-12">
+                <h3 class="text-center">Magic</h3>
+                <ul>
+                  <li>Fire</li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="c100 p100" id="health">
+                  <span id="health-value">100%</span>
+                  <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                  </div>
+                </div>
+                <!-- <input class="input" type="text" /> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+    <script>
+      $('.input').on('change', function() {
+        let hp = $('.input').val();
+        let val = ($('#health-value').text()).slice(0, -1);
+        let animateCircle = setInterval(function(){
+            if (val < hp) val++;
+            else val--;
+            $('#health').attr('class', 'c100 p' + val);
+            document.get
+            $('#health-value').text(val + '%');
+            if (val == hp) clearInterval(animateCircle);
+          }, 10);
+      });
+    </script>
+</html>
