@@ -1,3 +1,7 @@
+#gameWindow{
+	min-height: 614px;
+}
+
 .row {
   border: 10px solid #2c0900;
   box-shadow: 0px 0px 25px #f1e0a3;

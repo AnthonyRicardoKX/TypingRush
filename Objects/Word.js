@@ -1,7 +1,10 @@
-let listOfWord = ["Argentina", "Brazil", "Cat", "Devil", "Eagle", "Friendster", "Gilgamesh", "Hikikomori"];
+let listOfWord = ["Argentina", "Brazil", "Cat", "Devil", "Eagle", "Friendster", "Gilgamesh", "Hikikomori", "Indigo", "Jargon", "Kebab", "Lemon", "Melon", "Nostalgia", "Operator", "Query"];
+let usedWord = [];
 
-function Word(){
-  this.value = 0;
-  this.score = 0;
-  this.speed = 100;
-}
+for(var i = 0; i < listOfWord.length; i++)
+	usedWord.push(false);
+
+let status = {
+	NORMAL: 0,
+	FREEZE: 1
+};
