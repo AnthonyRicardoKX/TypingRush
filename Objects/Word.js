@@ -1,10 +1,9 @@
-let listOfWord = ["Argentina", "Brazil", "Cat", "Devil", "Eagle", "Friendster", "Gilgamesh", "Hikikomori", "Indigo", "Jargon", "Kebab", "Lemon", "Melon", "Nostalgia", "Operator", "Query"];
-let usedWord = [];
+let listOfWord = ["Argentina", "Brazil", "Cat", "Devil", "Eagle", "Friendster", "Gilgamesh", "Hikikomori", "Indigo", "Jargon", "Kebab", "Lemon", "Melon", "Nostalgia", "Operator", "Query", "Rainbow", "Sand", "Tour", "Union", "Velvet", "Wall", "Xylophone", "Yam", "Zebra"];
 
-for(var i = 0; i < listOfWord.length; i++)
-	usedWord.push(false);
-
-let status = {
+// for every word's status or drop
+let special = {
 	NORMAL: 0,
-	FREEZE: 1
+	FIRE: 1,
+	FREEZE: 2,
+	SLOW: 3
 };
