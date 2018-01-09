@@ -10,12 +10,13 @@ function Game(level = 1) {
   // array of booleans, true if the object is finished and disappeared, false if it's still in motion
   this.finished = [];
 
-  /*  NOTE : TO UNDERSTAND THE ATTRIBUTES OF THIS GAME, READ THE COMMENTS BELOW                                                        */
-  /*  - those four arrays above are related corresponding to their index.                                                              */
-  /*  - the first index is the first word that appears on screen, second is second, and so on...                                       */
-  /*  - In a nutshell, every word in the game that falls is registered in these four arrays according to the time in ascendingly order */
-  /*  - All the properties are shown below                                                                                             */
+  /*  NOTE : TO UNDERSTAND THE ATTRIBUTES OF THIS GAME, READ THE COMMENTS BELOW                                                       */
+  /*  - those last three arrays above are related corresponding to their index.                                                       */
+  /*  - the first index is the first word that appears on screen, second is second, and so on...                                      */
+  /*  - In a nutshell, every word in the game that falls is registered in these three arrays according to the time in ascending order */
+  /*  - All the properties are shown below                                                                                            */
 
+  this.uninterrupted = true; // is another event still running?
   this.fired = false;      // is your keyboard pressed?
   this.finishedCounts = 0; // how many words have disappeared
   this.time = 0;           // (not active yet)
@@ -32,9 +33,11 @@ function Game(level = 1) {
     groupIndex: -1,
     charIndex: -1
   };
+  this.focusesSpell = -1;  // spell index focus
   Level(level);            // set level
   for(var i = 0; i < listOfWord.length; i++)
     usedWord.push(false);
+
 }
 
 function Level(level){

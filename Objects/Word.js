@@ -7,3 +7,22 @@ let special = {
 	FREEZE: 2,
 	SLOW: 3
 };
+
+function generateDrop(){
+	// NORMAL: 85
+	// FIRE: 5
+	// FREEZE: 5
+	// SLOW: 5
+
+	// val range: 1 up to 100
+	var val = randomize(1, 101);
+
+	if(val <= 5)
+		return special.FIRE;
+	else if(val <= 10)
+		return special.FREEZE;
+	else if(val <= 15)
+		return special.SLOW;
+	else
+		return special.NORMAL;
+}
