@@ -79,7 +79,7 @@ var handler = function(event){
 				{
 					focuses.groupIndex = i;
 					focuses.charIndex = 0;
-					document.getElementById(groupOfWord[focuses.groupIndex].id).childNodes[focuses.charIndex].style.color = "yellow";
+					document.getElementById(groupOfWord[focuses.groupIndex].id).childNodes[focuses.charIndex].style.color = "#FFAB00";
 					break;
 				}
 			}
@@ -88,7 +88,7 @@ var handler = function(event){
 		else if(groupOfWord[focuses.groupIndex].content[focuses.charIndex + 1].toString().toLowerCase() === my_key && !finished[focuses.groupIndex])
 		{
 			focuses.charIndex++;
-			document.getElementById(groupOfWord[focuses.groupIndex].id).childNodes[focuses.charIndex].style.color = "yellow";
+			document.getElementById(groupOfWord[focuses.groupIndex].id).childNodes[focuses.charIndex].style.color = "#FFAB00";
 
 			// If the whole characters filled
 			if(focuses.charIndex + 1 === groupOfWord[focuses.groupIndex].content.length)
@@ -129,10 +129,10 @@ var handler = function(event){
 
 //clean word when whole characters is filled
 function cleanWord(index) {
-    usedWord[groupOfWord[index].wordIndex] = false;
+    usedWord[groupOfWord[index].alphaIndex] = false;
     clearInterval(groupOfInterval[index]);
     document.getElementById(groupOfWord[index].id).style.display = "none";
-    scores += 5;
+    scores += groupOfWord[index].content.length;
     finishedCounts++;
     document.getElementById("score").innerHTML = scores + "";
     finished[index] = true;
@@ -185,7 +185,8 @@ function generate(){
 		setTimeout(function(){
 			if(is_alive && uninterrupted)
 			{
-				createWordNode(pickWord(), randomize(leftBound, rightBound), 0);
+				var indices = pickWord();
+				createWordNode(indices[0], indices[1], randomize(leftBound, rightBound), 0);
 				finished.push(false);
 				generate();
 			}
@@ -195,21 +196,22 @@ function generate(){
 
 // randomly pick an available word
 function pickWord(){
-	var wordIndex = randomize(0, listOfWord.length);
-	while(usedWord[wordIndex]){
-		wordIndex = randomize(0, listOfWord.length);
+	var alphaIndex = randomize(0, 26); // A-Z
+	while(usedWord[alphaIndex]){
+		alphaIndex = randomize(0, 26);
 	}
-	usedWord[wordIndex] = true;
-	return wordIndex;
+	usedWord[alphaIndex] = true;
+	var wordIndex = randomize(0, listOfWord[alphaIndex].length);
+	return [alphaIndex, wordIndex];
 }
 
 // create new HTML node element for word
-function createWordNode(wordIndex = 0, x = 0, y = 0){
+function createWordNode(alphaIndex = 0, wordIndex = 0, x = 0, y = 0){
 
 	var new_node = document.createElement("div");
 	var groupIndex = groupOfWord.length;
 	var id = "w" + groupIndex;
-	var text = listOfWord[wordIndex];
+	var text = listOfWord[alphaIndex][wordIndex];
 
 	new_node.setAttribute("id", id);
 
@@ -226,7 +228,7 @@ function createWordNode(wordIndex = 0, x = 0, y = 0){
 		x: x,
 		y: y,
 		content: text,
-		wordIndex: wordIndex,
+		alphaIndex: alphaIndex,
 		speed: randomize(speed.low, speed.high),
 		status: status.NORMAL,
 		drop: generateDrop()
@@ -269,7 +271,7 @@ function fall(groupIndex, speeds, new_interval){
 				}
 				else
 				{
-					usedWord[groupOfWord[groupIndex].wordIndex] = false;
+					usedWord[groupOfWord[groupIndex].alphaIndex] = false;
 					node.style.display = "none";
 					document.getElementById("health-value").innerHTML = life + "%";
 					clearInterval(groupOfInterval[groupIndex]);
@@ -317,7 +319,7 @@ function fall(groupIndex, speeds, new_interval){
 				}
 				else
 				{
-					usedWord[groupOfWord[groupIndex].wordIndex] = false;
+					usedWord[groupOfWord[groupIndex].alphaIndex] = false;
 					node.style.display = "none";
 					document.getElementById("health-value").innerHTML = life + "%";
 					clearInterval(groupOfInterval[groupIndex]);
@@ -351,6 +353,20 @@ function fall(groupIndex, speeds, new_interval){
 }
 
 // Main
-Game(20);
+var inputLevel = 1;
+while(true)
+{
+	inputLevel = Number(prompt("Choose level : \n(1) Beginner\n(15) Intermediate\n(25) Expert"));
+	if(typeof inputLevel === "number")
+	{
+		if(inputLevel > 0)
+		{
+			inputLevel = Math.floor(inputLevel);
+			break;
+		}
+	}
+}
+
+Game(inputLevel);
 gameStart();
 groupOfSpell = [];

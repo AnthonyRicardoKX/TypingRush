@@ -28,16 +28,17 @@ function Game(level = 1) {
   this.is_alive = true;    // if health is not zero then alive, true at initial state
   this.lowerBound = 550;   // set lower bound in pixel
   this.leftBound = 10;     // set left bound in pixel
-  this.rightBound = 650;   // set right bound in pixel
+  this.rightBound = 620;   // set right bound in pixel
   this.focuses = {         // set target focus
     groupIndex: -1,
     charIndex: -1
   };
   this.focusesSpell = -1;  // spell index focus
   Level(level);            // set level
-  for(var i = 0; i < listOfWord.length; i++)
+  /*for(var i = 0; i < listOfWord.length; i++)
+    usedWord.push(false);*/
+  for(var i = 0; i < 26; i++)
     usedWord.push(false);
-
 }
 
 function Level(level){

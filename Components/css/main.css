@@ -1,5 +1,10 @@
+body{
+	background-color: darkgray;
+}
+
 #gameWindow{
 	min-height: 614px;
+	background-color: #EEEEEE;
 }
 
 .row {
@@ -22,4 +27,20 @@
 }
 #spells, ul,li {
     margin-bottom: 1px !important;
+}
+
+#lv-block{
+	background-color: #4FC3F7;
+}
+
+#score-block{
+	background-color: #81D4FA;
+}
+
+#magic-block{
+	background-color: #B3E5FC;
+}
+
+#health-block{
+	background-color: #E1F5FE;
 }
