@@ -14,7 +14,7 @@
         <script src="./Objects/Game.js"></script>
         <script src="./Objects/Word.js"></script>
     </head>
-    
+
     <body>
       <div class="container">
         <div class="row">
@@ -38,7 +38,7 @@
               <div class="col-lg-12">
                 <h3 class="text-center">Magic</h3>
                 <ul id="spells" class="list-group">
-                    
+
                 </ul>
               </div>
             </div>
@@ -58,18 +58,18 @@
       </div>
     </body>
     <script>
-      $('.input').on('change', function() {
-        let hp = $('.input').val();
-        let val = ($('#health-value').text()).slice(0, -1);
-        let animateCircle = setInterval(function(){
-            if (val < hp) val++;
-            else val--;
-            $('#health').attr('class', 'c100 p' + val);
-            document.get
-            $('#health-value').text(val + '%');
-            if (val == hp) clearInterval(animateCircle);
-          }, 10);
-      });
+      // $('.input').on('change', function() {
+      //   let hp = $('.input').val();
+      //   let val = ($('#health-value').text()).slice(0, -1);
+      //   let animateCircle = setInterval(function(){
+      //       if (val < hp) val++;
+      //       else val--;
+      //       $('#health').attr('class', 'c100 p' + val);
+      //       document.get
+      //       $('#health-value').text(val + '%');
+      //       if (val == hp) clearInterval(animateCircle);
+      //     }, 10);
+      // });
     </script>
     <script src="./Controllers/GameController.js"></script>
 </html>

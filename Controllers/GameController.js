@@ -7,7 +7,7 @@ function gameStart(){
 var handler = function(event){
 		var my_key = event.key.toString().toLowerCase();
         var ulSpell = document.getElementById("spells").children;
-        if(groupOfSpell.length > 0) {   
+        if(groupOfSpell.length > 0) {
             if(my_key == "arrowleft") {
                 if(focusesSpell == -1) focusesSpell = 0;
                 else focusesSpell--;
@@ -17,9 +17,9 @@ var handler = function(event){
                     ulSpell[i].style.borderColor = "white"
                 }
                 if(focusesSpell != -1) {
-                    ulSpell[focusesSpell].style.borderColor = "black"  
+                    ulSpell[focusesSpell].style.borderColor = "black"
                 }
-                
+
             }
             else if(my_key == "arrowright") {
                 if(focusesSpell == -1) focusesSpell = 0;
@@ -29,12 +29,12 @@ var handler = function(event){
                     ulSpell[i].style.borderColor = "white"
                 }
                 if(focusesSpell != -1) {
-                    ulSpell[focusesSpell].style.borderColor = "black"  
+                    ulSpell[focusesSpell].style.borderColor = "black"
                 }
             }
-              
+
         }
-        
+
         if(my_key == "enter") {
             if(focusesSpell != -1) {
                 if(groupOfSpell[focusesSpell] == 1) {
@@ -61,7 +61,7 @@ var handler = function(event){
                     groupOfSpell.splice(focusesSpell,1);
                     focusesSpell = -1;
                     for(var i=finishedCounts;i<groupOfWord.length;i++) {
-                        clearInterval(groupOfInterval[i]);  
+                        clearInterval(groupOfInterval[i]);
                         fall(i, randomize(speed.low / 2, speed.low / 2), false);
                     }
                     uninterrupted = true;
@@ -69,7 +69,7 @@ var handler = function(event){
 
             }
         }
-        
+
 		// get first character if the start is correct
 		if(focuses.groupIndex === -1)
 		{
@@ -110,21 +110,21 @@ var handler = function(event){
                             liStyle = "dark";
                             break;
                     }
-                    
+
                     groupOfSpell.push(groupOfWord[focuses.groupIndex].drop);
-                    
+
 					var node = document.createElement("LI");                 // Create a <li> node
                     node.className = "list-group-item text-center list-group-item-"+liStyle;
-                    
+
                     var textnode = document.createTextNode(spellName);         // Create a text node
                     node.appendChild(textnode);                              // Append the text to <li>
-                    document.getElementById("spells").appendChild(node); 
+                    document.getElementById("spells").appendChild(node);
 				}
-                
+
                 cleanWord(focuses.groupIndex);
 			}
 		}
-	
+
 }
 
 //clean word when whole characters is filled
@@ -132,14 +132,14 @@ function cleanWord(index) {
     usedWord[groupOfWord[index].alphaIndex] = false;
     clearInterval(groupOfInterval[index]);
     document.getElementById(groupOfWord[index].id).style.display = "none";
-    scores += groupOfWord[index].content.length;
+    scores += groupOfWord[index].content.length * Number(document.getElementById("level").innerHTML) + groupOfWord[index].content.length;
     finishedCounts++;
     document.getElementById("score").innerHTML = scores + "";
     finished[index] = true;
-    
+
     focuses.groupIndex = -1;
     focuses.charIndex = -1;
-    
+
     // If the condition reached and is able to go to the next level
     if(finishedCounts === counts && is_alive)
     {
@@ -262,18 +262,33 @@ function fall(groupIndex, speeds, new_interval){
 			if(groupOfWord[groupIndex].y >= lowerBound)
 			{
 				node.style.top = "0px";
+				let val = life;
 				life -= 5;
 				finishedCounts++;
 				// If dead, then stop
 				if(life <= 0)
 				{
+					let animateCircle = setInterval(function(){
+              if (life >= val) val++;
+              else val--;
+              $('#health').attr('class', 'c100 p' + val);
+              $('#health-value').text(val + '%');
+              if (val == life) clearInterval(animateCircle);
+            }, 50);
 					stop();
 				}
 				else
 				{
 					usedWord[groupOfWord[groupIndex].alphaIndex] = false;
 					node.style.display = "none";
-					document.getElementById("health-value").innerHTML = life + "%";
+					// document.getElementById("health-value").innerHTML = life + "%";
+					let animateCircle = setInterval(function(){
+              if (life >= val) val++;
+              else val--;
+              $('#health').attr('class', 'c100 p' + val);
+              $('#health-value').text(val + '%');
+              if (val == life) clearInterval(animateCircle);
+            }, 50);
 					clearInterval(groupOfInterval[groupIndex]);
 					finished[groupIndex] = true;
 					if(groupIndex === focuses.groupIndex)
