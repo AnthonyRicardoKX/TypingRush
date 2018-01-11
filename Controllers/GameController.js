@@ -133,6 +133,15 @@ function cleanWord(index) {
     clearInterval(groupOfInterval[index]);
     document.getElementById(groupOfWord[index].id).style.display = "none";
     scores += groupOfWord[index].content.length * Number(document.getElementById("level").innerHTML) + groupOfWord[index].content.length;
+		if (life != 100)
+		{
+			let animateCircle = setInterval(function(){
+					life++;
+					$('#health').attr('class', 'c100 p' + life);
+					$('#health-value').text(life + '%');
+					clearInterval(animateCircle);
+				}, 50);
+		}
     finishedCounts++;
     document.getElementById("score").innerHTML = scores + "";
     finished[index] = true;
@@ -273,7 +282,7 @@ function fall(groupIndex, speeds, new_interval){
               else val--;
               $('#health').attr('class', 'c100 p' + val);
               $('#health-value').text(val + '%');
-              if (val == life) clearInterval(animateCircle);
+              if (val == life || val == 0) clearInterval(animateCircle);
             }, 50);
 					stop();
 				}
@@ -371,7 +380,7 @@ function fall(groupIndex, speeds, new_interval){
 var inputLevel = 1;
 while(true)
 {
-	inputLevel = Number(prompt("Choose level : \n(1) Beginner\n(15) Intermediate\n(25) Expert"));
+	inputLevel = Number(prompt("Choose level : \n(1) Beginner\n(15) Intermediate\n(25) Expert\n(40) Insanity\n"));
 	if(typeof inputLevel === "number")
 	{
 		if(inputLevel > 0)

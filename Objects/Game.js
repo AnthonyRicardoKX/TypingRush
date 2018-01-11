@@ -50,7 +50,7 @@ function Level(level){
   // generator speed in miliseconds.
   this.generate_interval = {
     low  : 5500 / (1 + level / 5),  // the minimum generator speed on current level
-    high : 12000 / (1 + level / 5)  // the maximum generator speed on current level
+    high : 12000 / (1 + level + Math.sqrt(level) - (Math.sqrt(level)/2) / 5)  // the maximum generator speed on current level
   };
   // how many words provided in this level
   this.objective = 1 + level;       // how many words left on current level
